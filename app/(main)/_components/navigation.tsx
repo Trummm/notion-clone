@@ -1,6 +1,11 @@
 'use client'
-
-import { ChevronsLeft, MenuIcon } from 'lucide-react'
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings,
+} from 'lucide-react'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -8,13 +13,19 @@ import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { cn } from '@/lib/utils'
 import { UserItem } from './user-item'
+import Item from './item'
+import { toast } from 'sonner'
+import { useSettings } from '@/hooks/use-settings'
+import { useSearch } from '@/hooks/use-search'
 
 export const Navigation = () => {
   const router = useRouter()
   const params = useParams()
+  const settings = useSettings()
+  const search = useSearch()
   const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width: 768px)')
-  // const create = useMutation(api.documents.create)
+  const create = useMutation(api.documents.create)
 
   const isResizingRef = useRef(false)
   const sidebarRef = useRef<ElementRef<'aside'>>(null)
@@ -94,6 +105,18 @@ export const Navigation = () => {
     }
   }
 
+  const handleCreate = () => {
+    const promise = create({ title: 'Untitled' }).then((documentId) =>
+      router.push(`/documents/${documentId}`)
+    )
+
+    toast.promise(promise, {
+      loading: 'Creating a new note...',
+      success: 'New note created!',
+      error: 'Failed to create a new note.',
+    })
+  }
+
   return (
     <>
       <aside
@@ -116,6 +139,9 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
+          <Item label='Search' icon={Search} isSearch onClick={search.onOpen} />
+          <Item label='Settings' icon={Settings} onClick={settings.onOpen} />
+          <Item onClick={handleCreate} label='New Page' icon={PlusCircle} />
         </div>
         <div className='mt-4'>
           <p>Documents</p>
