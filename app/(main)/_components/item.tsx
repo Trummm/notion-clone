@@ -51,6 +51,19 @@ const Item = ({
   const router = useRouter()
   const ChevronIcon = expanded ? ChevronDown : ChevronRight
   const create = useMutation(api.documents.create)
+  const archive = useMutation(api.documents.archive)
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation()
+    if (!id) return
+    const promise = archive({ id }).then(() => router.push('/documents'))
+
+    toast.promise(promise, {
+      loading: 'Moving to trash...',
+      success: 'Note moved to trash!',
+      error: 'Failed to archive note.',
+    })
+  }
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -128,7 +141,7 @@ const Item = ({
               side='right'
               forceMount
             >
-              <DropdownMenuItem onClick={() => {}}>
+              <DropdownMenuItem onClick={onArchive}>
                 <Trash className='h-4 w-4 mr-2' />
                 Delete
               </DropdownMenuItem>
