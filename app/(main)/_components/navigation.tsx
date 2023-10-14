@@ -2,6 +2,7 @@
 import {
   ChevronsLeft,
   MenuIcon,
+  Plus,
   PlusCircle,
   Search,
   Settings,
@@ -17,6 +18,7 @@ import Item from './item'
 import { toast } from 'sonner'
 import { useSettings } from '@/hooks/use-settings'
 import { useSearch } from '@/hooks/use-search'
+import { DocumentList } from './document-list'
 
 export const Navigation = () => {
   const router = useRouter()
@@ -144,7 +146,19 @@ export const Navigation = () => {
           <Item onClick={handleCreate} label='New Page' icon={PlusCircle} />
         </div>
         <div className='mt-4'>
-          <p>Documents</p>
+          <DocumentList />
+          <Item onClick={handleCreate} icon={Plus} label='Add a page' />
+          {/* <Popover>
+            <PopoverTrigger className='w-full mt-4'>
+              <Item label='Trash' icon={Trash} />
+            </PopoverTrigger>
+            <PopoverContent
+              className='p-0 w-72'
+              side={isMobile ? 'bottom' : 'right'}
+            >
+              <TrashBox />
+            </PopoverContent>
+          </Popover> */}
         </div>
         <div
           onMouseDown={handleMouseDown}
