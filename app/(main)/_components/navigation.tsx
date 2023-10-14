@@ -7,6 +7,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
 import { cn } from '@/lib/utils'
+import { UserItem } from './user-item'
 
 export const Navigation = () => {
   const router = useRouter()
@@ -114,7 +115,7 @@ export const Navigation = () => {
           <ChevronsLeft className='h-6 w-6' />
         </div>
         <div>
-          <p>Action Items</p>
+          <UserItem />
         </div>
         <div className='mt-4'>
           <p>Documents</p>
