@@ -6,7 +6,13 @@ import {
   PlusCircle,
   Search,
   Settings,
+  Trash,
 } from 'lucide-react'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/ui/popover'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -19,6 +25,7 @@ import { toast } from 'sonner'
 import { useSettings } from '@/hooks/use-settings'
 import { useSearch } from '@/hooks/use-search'
 import { DocumentList } from './document-list'
+import { TrashBox } from './trash-box'
 
 export const Navigation = () => {
   const router = useRouter()
@@ -148,7 +155,7 @@ export const Navigation = () => {
         <div className='mt-4'>
           <DocumentList />
           <Item onClick={handleCreate} icon={Plus} label='Add a page' />
-          {/* <Popover>
+          <Popover>
             <PopoverTrigger className='w-full mt-4'>
               <Item label='Trash' icon={Trash} />
             </PopoverTrigger>
@@ -158,7 +165,7 @@ export const Navigation = () => {
             >
               <TrashBox />
             </PopoverContent>
-          </Popover> */}
+          </Popover>
         </div>
         <div
           onMouseDown={handleMouseDown}
