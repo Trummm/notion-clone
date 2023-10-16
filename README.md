@@ -1,17 +1,31 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+- NodeJS [v18.16.1]
+- NextJS [13.5.4]
+- Yarn [1.22.19]
+
+## Technology Use
+
+- [NextJS](https://nextjs.org/docs) - Frameworks create-next-app
+- [Tailwindcss](https://tailwindcss.com/docs/installation) - Style
+- [Convex](https://docs.convex.dev/home) - Backend Application Platform. Everything in Convex is live and realtime.
+- [Shadcn/ui](https://ui.shadcn.com/docs) - UI
+- [Clerk](https://clerk.com/) - Authentication(signIn/SignOut)
+- [Edge Store](https://edgestore.dev/docs/quick-start) - File uploads in Next.js
+- [BlockNote](https://www.blocknotejs.org/docs/introduction) - block-based rich-text editor for React
+
 ## Getting Started
 
 First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
